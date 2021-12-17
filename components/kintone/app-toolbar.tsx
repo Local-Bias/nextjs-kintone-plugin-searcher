@@ -60,7 +60,7 @@ const Container: VFC<ContainerProps> = () => {
   const [viewIndex, setViewIndex] = useRecoilState(kintoneViewIndexState);
 
   const onViewChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setViewIndex(e.target.value as number);
+    setViewIndex(Number(e.target.value));
   };
 
   return <StyledComponent {...{ viewIndex, onViewChange }} />;
