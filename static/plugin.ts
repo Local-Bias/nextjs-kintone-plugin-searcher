@@ -620,6 +620,9 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: '株式会社ノベルワークス',
     name: 'Excel読み込みプラグイン',
     url: 'https://www.novelworks.jp/kintone_plugin/excelimport_plugin',
+    price: 2200,
+    priceType: 'サブスクリプション(月額)',
+    memo: '55,000で買い切りも可能',
   },
   {
     author: '株式会社ノベルワークス',
@@ -728,11 +731,15 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: 'JBAT',
     name: 'ATTAZoo U',
     url: 'https://www.jbat.co.jp/lp/attazoou/',
+    priceType: 'サブスクリプション(年額)',
+    price: 120000,
   },
   {
     author: 'JBAT',
     name: 'プラグインセットATTAZoo',
     url: 'http://www.jbat.co.jp/lp/attazoo.html/',
+    priceType: 'サブスクリプション(年額)',
+    price: 36000,
   },
 
   {
@@ -1505,6 +1512,7 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: 'JOYZO',
     name: 'Backlog チケット連携プラグイン',
     url: 'https://www.joyzo.co.jp/plugin/backlog/',
+    closed: true,
   },
   {
     author: 'JOYZO',
@@ -1590,6 +1598,7 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: 'アールスリーインスティテュート',
     name: 'Excel帳票プラグイン',
     url: 'https://docs.gusuku.io/plugin/xlsxp/',
+    memo: 'gusukuアカウントが必要',
   },
   {
     author: 'gusuku',
@@ -1611,6 +1620,7 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: 'Smart',
     name: 'at estimat プラグイン',
     url: 'http://smartat.jp/estimate/kintone/',
+    price: '要相談',
   },
   {
     author: 'キントレンジャー365',
