@@ -24,6 +24,7 @@ type Props = ContainerProps & Readonly<{}>;
 const Component: VFC<Props> = ({ className }) => (
   <div {...{ className }}>
     <Head>
+      <title>{APP_NAME}</title>
       <link
         href='https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap'
         rel='stylesheet'
