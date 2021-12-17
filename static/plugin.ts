@@ -640,6 +640,9 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: '株式会社ノベルワークス',
     name: 'Ai名刺取り込みプラグイン',
     url: 'https://www.novelworks.jp/kintone_plugin/businesscardocr_plugin',
+    price: 22000,
+    priceType: 'サブスクリプション(月額)',
+    memo: '従量課金のオプションあり',
   },
   {
     author: '株式会社ノベルワークス',
@@ -1536,31 +1539,37 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: '有限会社マミー',
     name: 'フィールドコード表示',
     url: 'http://mammycloud.com/%E8%A3%BD%E5%93%81%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/kintone%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA/%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89%E3%82%B3%E3%83%BC%E3%83%89%E8%A1%A8%E7%A4%BA/',
+    closed: true,
   },
   {
     author: '有限会社マミー',
     name: '１文字・部分一致検索プラグイン',
     url: 'http://mammycloud.com/%E8%A3%BD%E5%93%81%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/kintone%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/%EF%BC%91%E6%96%87%E5%AD%97%E3%83%BB%E9%83%A8%E5%88%86%E4%B8%80%E8%87%B4%E6%A4%9C%E7%B4%A2%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/',
+    closed: true,
   },
   {
     author: '有限会社マミー',
     name: 'Twilioプラグイン',
     url: 'http://mammycloud.com/%E8%A3%BD%E5%93%81%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/kintone%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/twilio%E9%80%A3%E6%90%BA%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/',
+    closed: true,
   },
   {
     author: '有限会社マミー',
     name: 'グループ表示切り替えプラグイン',
     url: 'http://mammycloud.com/%E8%A3%BD%E5%93%81%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/kintone%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E8%A1%A8%E7%A4%BA%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/',
+    closed: true,
   },
   {
     author: '有限会社マミー',
     name: 'フィールド自動コピープラグイン',
     url: 'http://mammycloud.com/%E8%A3%BD%E5%93%81%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/kintone%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/%E8%87%AA%E5%8B%95%E8%A8%88%E7%AE%97%E4%B8%8D%E5%8F%AF%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89%E8%87%AA%E5%8B%95%E3%82%B3%E3%83%94%E3%83%BC%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/',
+    closed: true,
   },
   {
     author: '有限会社マミー',
     name: '表示内容記録プラグイン',
     url: 'http://mammycloud.com/%E8%A3%BD%E5%93%81%E3%83%BB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9/kintone%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/%E8%A1%A8%E7%A4%BA%E5%86%85%E5%AE%B9%E8%A8%98%E9%8C%B2%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3/',
+    closed: true,
   },
   {
     author: 'アールスリーインスティテュート',
@@ -1596,6 +1605,7 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: 'ツバイソ',
     name: '「ツバイソERP」プラグイン',
     url: 'https://tsubaiso.jp/news/2016/03/20160328.html',
+    closed: true,
   },
   {
     author: 'Smart',

@@ -16,7 +16,9 @@ export const kintonePluginsState = atom<KintonePlugin[]>({
 export const formattedPluginsState = selector<FormattedPlugin[]>({
   key: 'formattedPluginsState',
   get: ({ get }) => {
-    const plugins = get(kintonePluginsState);
+    const _plugins = get(kintonePluginsState);
+
+    const plugins = [..._plugins].filter((plugin) => !plugin.closed);
 
     return plugins.map<FormattedPlugin>((plugin) => {
       const isFree = plugin.priceType === '無料';
@@ -58,7 +60,8 @@ export const formattedPluginsState = selector<FormattedPlugin[]>({
   },
 });
 
-const formatNumber = (value: any | undefined) => (value ? `\xA5${value.toLocaleString()}` : '----');
+const formatNumber = (value: any | undefined) =>
+  value !== undefined ? `\xA5${value.toLocaleString()}` : '----';
 
 export const filteredPluginsState = selector<FormattedPlugin[]>({
   key: 'filteredPluginsState',
