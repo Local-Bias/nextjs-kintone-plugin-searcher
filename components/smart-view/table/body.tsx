@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { VFC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { FormattedPlugin, formattedPluginsState } from '../../../states/kintone-plugins';
+import { displayingPluginsState, FormattedPlugin } from '../../../states/kintone-plugins';
 import LinkIcon from '@mui/icons-material/Link';
 
 type Props = Readonly<{ plugins: FormattedPlugin[] }>;
@@ -38,7 +38,7 @@ const Component: VFC<Props> = ({ plugins }) => (
 );
 
 const Container: VFC = () => {
-  const plugins = useRecoilValue(formattedPluginsState);
+  const plugins = useRecoilValue(displayingPluginsState);
 
   return <Component {...{ plugins }} />;
 };

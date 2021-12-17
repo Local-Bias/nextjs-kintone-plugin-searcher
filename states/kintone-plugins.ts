@@ -4,6 +4,7 @@ import { searchTextState } from './search-text';
 import { paginationChunkState, paginationIndexState } from './pagination';
 import { HeaderLabel } from '../static/app';
 import { kintoneViewIndexState } from './view-index';
+import { fieldSortingState } from './sorting';
 
 export type FormattedPlugin = Record<HeaderLabel, string> & KintonePlugin;
 
@@ -12,59 +13,10 @@ export const kintonePluginsState = atom<KintonePlugin[]>({
   default: KINTONE_PLUGINS,
 });
 
-export const filteredPluginsState = selector<KintonePlugin[]>({
-  key: 'filteredPluginsState',
-  get: ({ get }) => {
-    const plugins = get(kintonePluginsState);
-    const input = get(searchTextState);
-    const viewIndex = get(kintoneViewIndexState);
-
-    let viewFiltered = [...plugins];
-    if (viewIndex === 1) {
-      viewFiltered = plugins.filter((plugin) => plugin.priceType === '無料');
-    } else if (viewIndex === 2) {
-      viewFiltered = plugins.filter(
-        (plugin) =>
-          plugin.priceType === 'サブスクリプション(年額)' ||
-          plugin.priceType === 'サブスクリプション(月額)' ||
-          plugin.priceType === '買い切り'
-      );
-    }
-
-    if (!input) {
-      return viewFiltered.sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    const words = input.toLowerCase().split(/\s+/g);
-
-    const filtered = viewFiltered.filter((plugin) =>
-      words.every(
-        (word) =>
-          plugin.author.toLowerCase().includes(word) || plugin.name.toLowerCase().includes(word)
-      )
-    );
-
-    const sorted = filtered.sort((a, b) => a.name.localeCompare(b.name));
-
-    return sorted;
-  },
-});
-
-export const displayingPluginsState = selector<KintonePlugin[]>({
-  key: 'displayingPluginsState',
-  get: ({ get }) => {
-    const plugins = get(filteredPluginsState);
-    const index = get(paginationIndexState);
-    const chunk = get(paginationChunkState);
-
-    return plugins.slice((index - 1) * chunk, index * chunk);
-  },
-});
-
 export const formattedPluginsState = selector<FormattedPlugin[]>({
   key: 'formattedPluginsState',
   get: ({ get }) => {
-    const plugins = get(displayingPluginsState);
+    const plugins = get(kintonePluginsState);
 
     return plugins.map<FormattedPlugin>((plugin) => {
       const isFree = plugin.priceType === '無料';
@@ -107,3 +59,80 @@ export const formattedPluginsState = selector<FormattedPlugin[]>({
 });
 
 const formatNumber = (value: any | undefined) => (value ? `\xA5${value.toLocaleString()}` : '----');
+
+export const filteredPluginsState = selector<FormattedPlugin[]>({
+  key: 'filteredPluginsState',
+  get: ({ get }) => {
+    const plugins = get(formattedPluginsState);
+    const input = get(searchTextState);
+    const viewIndex = get(kintoneViewIndexState);
+
+    let viewFiltered = [...plugins];
+    if (viewIndex === 1) {
+      viewFiltered = plugins.filter((plugin) => plugin.priceType === '無料');
+    } else if (viewIndex === 2) {
+      viewFiltered = plugins.filter(
+        (plugin) =>
+          plugin.priceType === 'サブスクリプション(年額)' ||
+          plugin.priceType === 'サブスクリプション(月額)' ||
+          plugin.priceType === '買い切り'
+      );
+    }
+
+    if (!input) {
+      return viewFiltered.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    const words = input.toLowerCase().split(/\s+/g);
+
+    const filtered = viewFiltered.filter((plugin) =>
+      words.every(
+        (word) =>
+          plugin.author.toLowerCase().includes(word) || plugin.name.toLowerCase().includes(word)
+      )
+    );
+
+    const sorted = filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+    return sorted;
+  },
+});
+
+const sortedPluginState = selector<FormattedPlugin[]>({
+  key: 'sortedPluginState',
+  get: ({ get }) => {
+    const plugins = get(filteredPluginsState);
+    const sorting = get(fieldSortingState);
+
+    const label = sorting.label;
+
+    if (!label) {
+      return plugins;
+    }
+
+    const sorted = [...plugins].sort((pluginA, pluginB) => {
+      const a = pluginA[label];
+      const b = pluginB[label];
+
+      if (typeof a === 'number' && typeof b === 'number') {
+        return sorting.order === 'desc' ? b - a : a - b;
+      }
+      const localeCompared = a.localeCompare(b, 'ja');
+
+      return sorting.order === 'desc' ? localeCompared * -1 : localeCompared;
+    });
+
+    return sorted;
+  },
+});
+
+export const displayingPluginsState = selector<FormattedPlugin[]>({
+  key: 'displayingPluginsState',
+  get: ({ get }) => {
+    const plugins = get(sortedPluginState);
+    const index = get(paginationIndexState);
+    const chunk = get(paginationChunkState);
+
+    return plugins.slice((index - 1) * chunk, index * chunk);
+  },
+});

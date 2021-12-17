@@ -1,11 +1,9 @@
-import React, { FC } from "react";
-import styled from "@emotion/styled";
+import React, { FC } from 'react';
+import styled from '@emotion/styled';
 
 type Props = Readonly<{ className?: string }>;
 
-const Component: FC<Props> = ({ children, className }) => (
-  <div {...{ className }}>{children}</div>
-);
+const Component: FC<Props> = ({ children, className }) => <div {...{ className }}>{children}</div>;
 
 const StyledComponent = styled(Component)`
   table {
@@ -53,9 +51,7 @@ const StyledComponent = styled(Component)`
             z-index: 1;
           }
 
-          &.sortable {
-            cursor: pointer;
-          }
+          cursor: pointer;
 
           > div {
             display: flex;
