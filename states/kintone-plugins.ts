@@ -3,6 +3,7 @@ import { KintonePlugin, KINTONE_PLUGINS } from '../static/plugin';
 import { searchTextState } from './search-text';
 import { paginationChunkState, paginationIndexState } from './pagination';
 import { HeaderLabel } from '../static/app';
+import { kintoneViewIndexState } from './view-index';
 
 export type FormattedPlugin = Record<HeaderLabel, string> & KintonePlugin;
 
@@ -16,14 +17,27 @@ export const filteredPluginsState = selector<KintonePlugin[]>({
   get: ({ get }) => {
     const plugins = get(kintonePluginsState);
     const input = get(searchTextState);
+    const viewIndex = get(kintoneViewIndexState);
+
+    let viewFiltered = [...plugins];
+    if (viewIndex === 1) {
+      viewFiltered = plugins.filter((plugin) => plugin.priceType === '無料');
+    } else if (viewIndex === 2) {
+      viewFiltered = plugins.filter(
+        (plugin) =>
+          plugin.priceType === 'サブスクリプション(年額)' ||
+          plugin.priceType === 'サブスクリプション(月額)' ||
+          plugin.priceType === '買い切り'
+      );
+    }
 
     if (!input) {
-      return [...plugins].sort((a, b) => a.name.localeCompare(b.name));
+      return viewFiltered.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     const words = input.toLowerCase().split(/\s+/g);
 
-    const filtered = plugins.filter((plugin) =>
+    const filtered = viewFiltered.filter((plugin) =>
       words.every(
         (word) =>
           plugin.author.toLowerCase().includes(word) || plugin.name.toLowerCase().includes(word)

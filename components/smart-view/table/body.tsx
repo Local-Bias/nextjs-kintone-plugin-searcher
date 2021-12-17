@@ -2,7 +2,6 @@ import Link from 'next/link';
 import React, { VFC } from 'react';
 import { useRecoilValue } from 'recoil';
 import { FormattedPlugin, formattedPluginsState } from '../../../states/kintone-plugins';
-import { HEADER_LABELS } from '../../../static/app';
 import LinkIcon from '@mui/icons-material/Link';
 
 type Props = Readonly<{ plugins: FormattedPlugin[] }>;

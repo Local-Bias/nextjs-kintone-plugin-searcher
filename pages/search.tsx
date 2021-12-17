@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 
 import SmartView from '../components/smart-view';
+import KintoneAppToolbar from '../components/kintone/app-toolbar';
 import Head from 'next/head';
 import { LogoIcon } from '../components/icons';
 
@@ -50,24 +51,7 @@ const Component: VFC<Props> = ({ className }) => (
       <HomeIcon />
       <div>アプリ: {APP_NAME}</div>
     </div>
-    <div className='app-toolbar'>
-      <div className='view-select'>
-        <CalendarViewMonthIcon color='primary' />
-        <TextField
-          select
-          variant='outlined'
-          color='primary'
-          size='small'
-          sx={{ border: '0 !important' }}
-        >
-          {VIEWS.map((view, i) => (
-            <MenuItem key={i} value={view.value}>
-              {view.name}
-            </MenuItem>
-          ))}
-        </TextField>
-      </div>
-    </div>
+    <KintoneAppToolbar />
     <SmartView />
   </div>
 );
@@ -135,28 +119,6 @@ const StyledComponent = styled(Component)`
     gap: 12px;
     svg {
       width: 18px;
-    }
-  }
-
-  .app-toolbar {
-    height: 80px;
-    display: flex;
-    align-items: center;
-
-    padding: 0 16px;
-
-    .view-select {
-      border: 5px solid #3498db;
-      border-right: 90px solid #3498db;
-      border-radius: 3px;
-      padding: 0 0 0 4px;
-      width: 350px;
-      display: flex;
-      align-items: center;
-      div {
-        width: 100%;
-        border: 0 !important;
-      }
     }
   }
 `;
