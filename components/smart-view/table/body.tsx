@@ -1,20 +1,20 @@
+import Link from 'next/link';
 import React, { VFC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { displayingPluginsState } from '../../../states/kintone-plugins';
-import { KintonePlugin } from '../../../static/plugin';
-import Link from 'next/link';
+import { FormattedPlugin, formattedPluginsState } from '../../../states/kintone-plugins';
+import { HEADER_LABELS } from '../../../static/app';
 import LinkIcon from '@mui/icons-material/Link';
 
-type Props = Readonly<{ plugins: KintonePlugin[] }>;
+type Props = Readonly<{ plugins: FormattedPlugin[] }>;
 
 const Component: VFC<Props> = ({ plugins }) => (
   <tbody>
     {plugins.map((plugin, i) => (
       <tr key={i}>
-        <td className='left'>
+        <td>
           <Link href={plugin.url}>
             <a target='_blank' rel='noreferrer'>
-              {plugin.author}
+              {plugin['作者']}
               <LinkIcon />
             </a>
           </Link>
@@ -22,45 +22,24 @@ const Component: VFC<Props> = ({ plugins }) => (
         <td>
           <Link href={plugin.url}>
             <a target='_blank' rel='noreferrer'>
-              {plugin.name}
+              {plugin['プラグイン名']}
               <LinkIcon />
             </a>
           </Link>
         </td>
-        <td>{plugin.priceType}</td>
-        <td>{plugin.price}</td>
-        <td className='right'>
-          &yen;
-          {plugin.priceType === '無料'
-            ? 0
-            : plugin.price === '要相談'
-            ? plugin.price
-            : plugin.priceType === '買い切り' || plugin.priceType === 'サブスクリプション(月額)'
-            ? plugin.price
-            : plugin.priceType === 'サブスクリプション(年額)'
-            ? Math.round((plugin.price || 0) / 12).toLocaleString()
-            : ''}
-        </td>
-        <td className='right'>
-          &yen;
-          {plugin.priceType === '無料'
-            ? 0
-            : plugin.price === '要相談'
-            ? plugin.price.toLocaleString()
-            : plugin.priceType === '買い切り' || plugin.priceType === 'サブスクリプション(年額)'
-            ? (plugin.price || 0).toLocaleString()
-            : plugin.priceType === 'サブスクリプション(月額)'
-            ? ((plugin.price || 0) * 12).toLocaleString()
-            : ''}
-        </td>
-        <td>{plugin.priceType === '無料' ? '----' : plugin.trialVersion ? 'あり' : 'なし'}</td>
+        <td>{plugin['料金体系']}</td>
+        <td className='right'>{plugin['価格']}</td>
+        <td className='right'>{plugin['価格(月換算)']}</td>
+        <td className='right'>{plugin['価格(年換算)']}</td>
+        <td>{plugin['試用版']}</td>
+        <td>{plugin['備考']}</td>
       </tr>
     ))}
   </tbody>
 );
 
 const Container: VFC = () => {
-  const plugins = useRecoilValue(displayingPluginsState);
+  const plugins = useRecoilValue(formattedPluginsState);
 
   return <Component {...{ plugins }} />;
 };

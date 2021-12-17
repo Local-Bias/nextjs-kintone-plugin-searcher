@@ -14,8 +14,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import Image from 'next/image';
 import { MenuItem, TextField } from '@mui/material';
-import { VIEWS } from '../static/view';
-import { APP_NAME } from '../static/layout';
+import { VIEWS } from '../static/app';
+import { APP_NAME } from '../static/app';
 
 type ContainerProps = Readonly<{ className?: string }>;
 type Props = ContainerProps & Readonly<{}>;

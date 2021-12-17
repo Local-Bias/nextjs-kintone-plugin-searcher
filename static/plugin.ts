@@ -1525,9 +1525,12 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     url: 'http://cc.timeconcier.jp/plugin/',
   },
   {
-    author: '',
+    author: 'kiku38',
     name: 'kintoneで匿名掲示板プラグイン作ってみた',
     url: 'http://qiita.com/kiku38/items/48c145b605aa37bc933e',
+    price: 0,
+    priceType: '無料',
+    memo: 'オープンソース',
   },
   {
     author: '有限会社マミー',

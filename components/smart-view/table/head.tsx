@@ -1,15 +1,12 @@
-import React, { VFC } from "react";
+import React, { VFC } from 'react';
+import { HEADER_LABELS } from '../../../static/app';
 
 const Component: VFC = () => (
   <thead>
     <tr>
-      <th>作者</th>
-      <th>プラグイン名</th>
-      <th>料金体系</th>
-      <th>価格</th>
-      <th>価格(月換算)</th>
-      <th>価格(年換算)</th>
-      <th>試用版</th>
+      {HEADER_LABELS.map((label, i) => (
+        <th key={i}>{label}</th>
+      ))}
     </tr>
   </thead>
 );
