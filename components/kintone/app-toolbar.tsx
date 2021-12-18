@@ -9,27 +9,19 @@ import { kintoneViewIndexState } from '../../states/view-index';
 
 type ContainerProps = DeepReadonly<{}>;
 type Props = ContainerProps &
-  DeepReadonly<{ viewIndex: number; onViewChange: ChangeEventHandler<HTMLInputElement> }>;
+  DeepReadonly<{ viewIndex: number; onViewChange: ChangeEventHandler<HTMLSelectElement> }>;
 
 const Component: VFCX<Props> = ({ className, viewIndex, onViewChange }) => (
   <div {...{ className }}>
     <div className='view-select'>
       <CalendarViewMonthIcon color='primary' />
-      <TextField
-        select
-        variant='outlined'
-        color='primary'
-        size='small'
-        sx={{ border: '0 !important' }}
-        value={viewIndex}
-        onChange={onViewChange}
-      >
+      <select value={viewIndex} onChange={onViewChange}>
         {VIEWS.map((view, i) => (
-          <MenuItem key={i} value={view.value}>
+          <option key={i} value={view.value}>
             {view.name}
-          </MenuItem>
+          </option>
         ))}
-      </TextField>
+      </select>
     </div>
   </div>
 );
@@ -39,11 +31,25 @@ const StyledComponent = styled(Component)`
   display: flex;
   align-items: center;
 
+  select {
+    border: 0;
+    height: 40px;
+    color: #3498db;
+    width: 100%;
+    padding: 0 8px;
+    font-size: 90%;
+  }
+
   padding: 0 16px;
 
   .view-select {
     border: 5px solid #3498db;
     border-right: 90px solid #3498db;
+
+    svg {
+      fill: #3498db;
+    }
+
     border-radius: 3px;
     padding: 0 0 0 4px;
     width: 350px;
