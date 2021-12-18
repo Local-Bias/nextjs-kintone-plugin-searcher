@@ -2,15 +2,12 @@ import React, { VFC } from 'react';
 import styled from '@emotion/styled';
 import Head from 'next/head';
 import Image from 'next/image';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
-import FilterVintageIcon from '@mui/icons-material/FilterVintage';
-import FlatwareIcon from '@mui/icons-material/Flatware';
-import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import HomeIcon from '@mui/icons-material/Home';
 
 import SmartView from '../components/smart-view';
 import { APP_NAME } from '../static/app';
 import KintoneHeader from '../components/kintone/header';
+import KintoneToolbar from '../components/kintone/toolbar';
 import KintoneAppToolbar from '../components/kintone/app-toolbar';
 
 type ContainerProps = Readonly<{ className?: string }>;
@@ -26,12 +23,7 @@ const Component: VFC<Props> = ({ className }) => (
       />
     </Head>
     <KintoneHeader />
-    <div className='toolbar'>
-      <LunchDiningIcon />
-      <FilterVintageIcon />
-      <FlatwareIcon />
-      <FastfoodIcon />
-    </div>
+    <KintoneToolbar />
     <div className='titlebar'>
       <Image src='/images/puzzle.png' height={48} width={48} alt='App Icon' />
       <div>{APP_NAME}</div>
@@ -46,24 +38,6 @@ const Component: VFC<Props> = ({ className }) => (
 );
 
 const StyledComponent = styled(Component)`
-  .toolbar {
-    height: 48px;
-    position: sticky;
-    z-index: 10;
-    top: 0;
-    background-color: #4b4b4b;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 0 12px;
-
-    svg {
-      fill: #888;
-      width: 30px;
-      height: 30px;
-    }
-  }
-
   .titlebar {
     height: 48px;
     background-color: #d4d7d7;
