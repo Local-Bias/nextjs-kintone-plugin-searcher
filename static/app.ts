@@ -21,3 +21,8 @@ export const HEADER_LABELS = [
 ] as const;
 
 export type HeaderLabel = typeof HEADER_LABELS[number];
+
+export const INFO = [
+  '掲載している情報は最新ではない可能性があります。',
+  'プラグインをご利用の際は、必ず各遷移先で最新の情報をご確認ください。',
+];
