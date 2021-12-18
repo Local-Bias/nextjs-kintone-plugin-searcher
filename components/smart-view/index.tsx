@@ -1,10 +1,10 @@
-import React, { VFC, VFCX } from "react";
-import styled from "@emotion/styled";
-import { DeepReadonly } from "utility-types";
+import React, { VFC, VFCX } from 'react';
+import styled from '@emotion/styled';
+import { DeepReadonly } from 'utility-types';
 
-import Header from "./header";
-import Table from "./table";
-import Footer from "./footer";
+import Header from './header';
+import Table from './table';
+import Footer from './footer';
 
 type ContainerProps = DeepReadonly<{}>;
 type Props = ContainerProps & DeepReadonly<{}>;

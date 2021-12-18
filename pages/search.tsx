@@ -1,22 +1,17 @@
 import React, { VFC } from 'react';
 import styled from '@emotion/styled';
-import Link from 'next/link';
-
-import SmartView from '../components/smart-view';
-import KintoneAppToolbar from '../components/kintone/app-toolbar';
 import Head from 'next/head';
-import { LogoIcon } from '../components/icons';
-
+import Image from 'next/image';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 import FilterVintageIcon from '@mui/icons-material/FilterVintage';
 import FlatwareIcon from '@mui/icons-material/Flatware';
 import LunchDiningIcon from '@mui/icons-material/LunchDining';
 import HomeIcon from '@mui/icons-material/Home';
-import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
-import Image from 'next/image';
-import { MenuItem, TextField } from '@mui/material';
-import { VIEWS } from '../static/app';
+
+import SmartView from '../components/smart-view';
 import { APP_NAME } from '../static/app';
+import KintoneHeader from '../components/kintone/header';
+import KintoneAppToolbar from '../components/kintone/app-toolbar';
 
 type ContainerProps = Readonly<{ className?: string }>;
 type Props = ContainerProps & Readonly<{}>;
@@ -30,14 +25,7 @@ const Component: VFC<Props> = ({ className }) => (
         rel='stylesheet'
       />
     </Head>
-    <div className='header'>
-      <Link href='/'>
-        <div className='logo'>
-          <LogoIcon />
-          <div>ribbit</div>
-        </div>
-      </Link>
-    </div>
+    <KintoneHeader />
     <div className='toolbar'>
       <LunchDiningIcon />
       <FilterVintageIcon />
@@ -58,28 +46,6 @@ const Component: VFC<Props> = ({ className }) => (
 );
 
 const StyledComponent = styled(Component)`
-  .header {
-    font-family: 'Bakbak One', cursive;
-    font-size: 28px;
-    height: 64px;
-    background-color: #fc0;
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-    color: #000c;
-    fill: #000c;
-
-    .logo {
-      cursor: pointer;
-      display: flex;
-      gap: 8px;
-    }
-
-    svg {
-      width: 32px;
-    }
-  }
-
   .toolbar {
     height: 48px;
     position: sticky;

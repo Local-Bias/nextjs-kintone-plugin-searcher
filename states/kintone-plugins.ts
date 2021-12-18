@@ -6,7 +6,7 @@ import { HeaderLabel } from '../static/app';
 import { kintoneViewIndexState } from './view-index';
 import { fieldSortingState } from './sorting';
 
-export type FormattedPlugin = Record<HeaderLabel, string> & KintonePlugin;
+export type FormattedPlugin = Record<HeaderLabel, string | number | null> & KintonePlugin;
 
 export const kintonePluginsState = atom<KintonePlugin[]>({
   key: 'kintonePluginsState',
@@ -22,34 +22,32 @@ export const formattedPluginsState = selector<FormattedPlugin[]>({
 
     return plugins.map<FormattedPlugin>((plugin) => {
       const isFree = plugin.priceType === '無料';
-      const needsConsultation = plugin.price === '要相談';
+      const needsConsultation = plugin.priceType === '要相談';
       const isKaikiri = plugin.priceType === '買い切り';
       const isMonthly = plugin.priceType === 'サブスクリプション(月額)';
       const isYearly = plugin.priceType === 'サブスクリプション(年額)';
 
-      const price = needsConsultation ? '要相談' : formatNumber(plugin.price);
-
       const monthly = isFree
-        ? formatNumber(0)
+        ? 0
         : isKaikiri || isMonthly || needsConsultation
-        ? formatNumber(plugin.price)
+        ? plugin.price ?? null
         : isYearly
-        ? formatNumber(Math.round((plugin.price as number) / 12))
-        : '----';
+        ? Math.round((plugin.price as number) / 12)
+        : null;
 
       const yearly = isFree
-        ? formatNumber(0)
+        ? 0
         : isKaikiri || isYearly || needsConsultation
-        ? formatNumber(plugin.price)
+        ? plugin.price ?? null
         : isMonthly
-        ? formatNumber(((plugin.price as number) || 0) * 12)
-        : '';
+        ? ((plugin.price as number) || 0) * 12
+        : null;
 
       return {
         ...plugin,
         作者: plugin.author,
         プラグイン名: plugin.name,
-        価格: price,
+        価格: plugin.price || '',
         '価格(月換算)': monthly,
         '価格(年換算)': yearly,
         料金体系: plugin.priceType || '----',
@@ -59,9 +57,6 @@ export const formattedPluginsState = selector<FormattedPlugin[]>({
     });
   },
 });
-
-const formatNumber = (value: any | undefined) =>
-  value !== undefined ? `\xA5${value.toLocaleString()}` : '----';
 
 export const filteredPluginsState = selector<FormattedPlugin[]>({
   key: 'filteredPluginsState',
@@ -113,12 +108,25 @@ const sortedPluginState = selector<FormattedPlugin[]>({
       return plugins;
     }
 
+    const sortsDesc = sorting.order === 'desc';
+
     const sorted = [...plugins].sort((pluginA, pluginB) => {
       const a = pluginA[label];
       const b = pluginB[label];
 
+      if (a === null && b === null) {
+        return 0;
+      } else if (a === null) {
+        return sortsDesc ? 1 : -1;
+      } else if (b === null) {
+        return sortsDesc ? -1 : 1;
+      }
+
       if (typeof a === 'number' && typeof b === 'number') {
-        return sorting.order === 'desc' ? b - a : a - b;
+        return sortsDesc ? b - a : a - b;
+      } else if (typeof a === 'number' || typeof b === 'number') {
+        const compare = String(a).localeCompare(String(b));
+        return sortsDesc ? compare : compare * -1;
       }
       const localeCompared = a.localeCompare(b, 'ja');
 

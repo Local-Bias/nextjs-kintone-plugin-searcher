@@ -2,10 +2,16 @@ export type KintonePlugin = {
   author: string;
   name: string;
   url: string;
-  priceType?: '無料' | '買い切り' | 'サブスクリプション(月額)' | 'サブスクリプション(年額)';
-  price?: number | '要相談';
+  priceType?:
+    | '無料'
+    | '買い切り'
+    | 'サブスクリプション(月額)'
+    | 'サブスクリプション(年額)'
+    | '要相談';
+  price?: number;
   closed?: boolean;
   trialVersion?: boolean;
+  initialCost?: number;
   memo?: string;
 };
 
@@ -1712,7 +1718,7 @@ export const KINTONE_PLUGINS: KintonePlugin[] = [
     author: 'Smart',
     name: 'at estimat プラグイン',
     url: 'http://smartat.jp/estimate/kintone/',
-    price: '要相談',
+    priceType: '要相談',
   },
   {
     author: 'キントレンジャー365',
