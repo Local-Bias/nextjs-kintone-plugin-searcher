@@ -75,6 +75,14 @@ export const filteredPluginsState = selector<FormattedPlugin[]>({
           plugin.priceType === 'サブスクリプション(月額)' ||
           plugin.priceType === '買い切り'
       );
+    } else if (viewIndex === 3) {
+      viewFiltered = plugins.filter((plugin) => plugin.priceType === '買い切り');
+    } else if (viewIndex === 4) {
+      viewFiltered = plugins.filter(
+        (plugin) =>
+          plugin.priceType === 'サブスクリプション(年額)' ||
+          plugin.priceType === 'サブスクリプション(月額)'
+      );
     }
 
     if (!input) {

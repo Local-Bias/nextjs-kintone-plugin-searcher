@@ -2,7 +2,9 @@ export const VIEWS = [
   { name: 'すべて', value: 0 },
   { name: '無償プラグインのみ', value: 1 },
   { name: '有償プラグインのみ', value: 2 },
-  { name: '(すべて)', value: 3 },
+  { name: '買い切りのみ', value: 3 },
+  { name: 'サブスクリプションのみ', value: 4 },
+  { name: '(すべて)', value: 5 },
 ];
 
 export const APP_NAME = 'kintone プラグイン簡易検索(WIP)';
