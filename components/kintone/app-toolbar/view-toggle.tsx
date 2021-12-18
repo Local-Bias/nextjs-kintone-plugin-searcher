@@ -1,11 +1,14 @@
 import React, { ChangeEventHandler, VFC, VFCX } from 'react';
 import styled from '@emotion/styled';
 import { DeepReadonly } from 'utility-types';
-import { VIEWS } from '../../static/app';
-import { MenuItem, TextField } from '@mui/material';
+import { VIEWS } from '../../../static/app';
 import CalendarViewMonthIcon from '@mui/icons-material/CalendarViewMonth';
 import { useRecoilState } from 'recoil';
-import { kintoneViewIndexState } from '../../states/view-index';
+import { kintoneViewIndexState } from '../../../states/view-index';
+import PetsIcon from '@mui/icons-material/Pets';
+import ParkIcon from '@mui/icons-material/Park';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import TimelineIcon from '@mui/icons-material/Timeline';
 
 type ContainerProps = DeepReadonly<{}>;
 type Props = ContainerProps &
@@ -23,14 +26,14 @@ const Component: VFCX<Props> = ({ className, viewIndex, onViewChange }) => (
         ))}
       </select>
     </div>
+    <div className='graph'>
+      <TimelineIcon />
+    </div>
   </div>
 );
 
 const StyledComponent = styled(Component)`
-  height: 80px;
-  display: flex;
-  align-items: center;
-
+  border: 5px solid #3498db;
   select {
     border: 0;
     height: 40px;
@@ -40,24 +43,32 @@ const StyledComponent = styled(Component)`
     font-size: 90%;
   }
 
-  padding: 0 16px;
+  svg {
+    fill: #3498db;
+  }
 
-  .view-select {
-    border: 5px solid #3498db;
-    border-right: 90px solid #3498db;
+  border-radius: 3px;
+  padding: 0 0 0 4px;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  div {
+    width: 250px;
+    border: 0 !important;
+  }
 
-    svg {
-      fill: #3498db;
-    }
-
-    border-radius: 3px;
-    padding: 0 0 0 4px;
-    width: 350px;
+  .graph {
     display: flex;
     align-items: center;
-    div {
-      width: 100%;
-      border: 0 !important;
+    justify-content: center;
+    width: 90px;
+    height: 40px;
+    background-color: #3498db;
+
+    svg {
+      width: 90px;
+      height: 40px;
+      fill: #fff;
     }
   }
 `;
