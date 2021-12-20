@@ -31,8 +31,8 @@ const Page: NextPage<Props> = ({ className }) => (
           </a>
         </Link>
       </div>
-      <div className='vertical flex powerdby'>
-        <div>Powerd by</div>
+      <div className='vertical flex poweredby'>
+        <div>Powered by</div>
         <div className='flex'>
           <Link href='https://nextjs.org/'>Next.js</Link>
           <Link href='https://vercel.com/'>Vercel</Link>
@@ -62,7 +62,7 @@ const StyledPage = styled(Page)`
     flex-direction: column;
   }
 
-  .powerdby {
+  .poweredby {
     gap: 8px;
   }
 
